@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Jiggle Puzzle</title>
+    <link rel="icon" type="image/png" href="jiggle.png" sizes="200x200">
+    <script type="text/javascript" src="jiggle.js"></script>
+    <script>
+
+    const INDEX_PRETTY_NAME = 0
+    const INDEX_PREVIEW_IMAGE = 1
+    const INDEX_PIECES_DIR = 2
+    const INDEX_PIECES_X = 3
+    const INDEX_PIECES_Y = 4
+    const INDEX_EXTENSION = 5
+    const INDEX_PREVIEW_WIDTH = 6
+    const INDEX_PREVIEW_HEIGHT = 7
+    const INDEX_PIECE_EXTENDED_WIDTH = 8
+    const INDEX_PIECE_EXTENDED_HEIGHT = 9
+
+    const DATABASE = [
+        ["01_Hatra", "01_Hatra.gif", "01_Hatra-6x5", 6, 5, "gif", 1200, 675, 200, 135],
+        ["02_Leptis-Magna", "02_Leptis-Magna.gif", "02_Leptis-Magna-6x5", 6, 5, "gif", 1200, 675, 200, 135],
+        ["03_Palmyra", "03_Palmyra.gif", "03_Palmyra-6x5", 6, 5, "gif", 1200, 675, 200, 135],
+        ["04_Fort-San-Lorenzo", "04_Fort-San-Lorenzo.gif", "04_Fort-San-Lorenzo-6x5", 6, 5, "gif", 1200, 675, 200, 135],
+        ["05_Nan-Madol", "05_Nan-Madol.gif", "05_Nan-Madol-6x5", 6, 5, "gif", 1200, 675, 200, 135],
+        ["06_Jerusalem", "06_Jerusalem.gif", "06_Jerusalem-6x5", 6, 5, "gif", 1200, 675, 200, 135],
+
+        ["06_Jerusalem JIGGLE", "06_Jerusalem.gif", "JERUS-10x9-WEBP", 10, 9, "webp", 1200, 675, 200, 135],
+
+        ["07-Luxor-Temple", "07-Luxor-Temple.gif", "07-Luxor-Temple-6x5", 6, 5, "gif", 1080, 753, 180, 150],
+        ["08-The-Pyramid-of-the-Sun", "08-The-Pyramid-of-the-Sun.gif", "08-The-Pyramid-of-the-Sun-6x5", 6, 5, "gif", 1080, 697, 180, 140],
+        ["09-Area-Sacra", "09-Area-Sacra.gif", "09-Area-Sacra-6x5", 6, 5, "gif", 1080, 723, 180, 145],
+        ["10-Parthenon", "10-Parthenon.gif", "10-Parthenon-6x5", 6, 5, "gif", 1080, 717, 180, 143],
+        ["11-Nohoch-Mul-Pyramid", "11-Nohoch-Mul-Pyramid.gif", "11-Nohoch-Mul-Pyramid-6x5", 6, 5, "gif", 1080, 710, 180, 142],
+        ["12-Temple-of-Jupiter", "12-Temple-of-Jupiter.gif", "12-Temple-of-Jupiter-6x5", 6, 5, "gif", 1080, 720, 180, 144],
+        ["13-Milecastle", "13-Milecastle.gif", "13-Milecastle-6x5", 6, 5, "gif", 1080, 750, 180, 150],
+
+        ["airport", "airport.gif", "airport-4x5", 4, 5, "gif", 500, 750, 125, 150],
+        ["airport JIGGLE", "airport.gif", "AIRPORT-4x5-WEBP", 4, 5, "webp", 500, 750, 200, 225],
+
+
+        ["cars", "cars.gif", "cars-4x3", 4, 3, "gif", 384, 288, 96, 96],
+
+        ["cars JIGGLE", "cars.gif", "CARS-4x3-WEBP", 4, 3, "webp", 384, 288, 160, 160],
+
+        ["toaster", "toaster.gif", "toaster-2x4", 2, 4, "gif", 384, 384, 192, 96]
+    ]
+
+    var puzzles = {}
+
+    var showPreview = localStorage.getItem("PREVIEW", "FALSE") || "FALSE";
+
+    function makePiece(puzzlePath, ext, x, y, dx, dy, ox, oy) {
+        let board = document.getElementById('board')
+
+        let pieceDom = document.createElement('div')
+        pieceDom.style.width = dx + "px"
+        pieceDom.style.height = dy + "px"
+        pieceDom.className = "js-dragndrop piece"
+        pieceDom.style.position = "absolute";
+        pieceDom.style.left = ((Math.random() > 0.5) ? 1000 : 0) + (Math.random() * 600) + "px";
+        pieceDom.style.top = (Math.random() * 700) + "px";
+
+        let piecePic = document.createElement('img')
+        piecePic.style.position = "relative"
+        piecePic.style.top = "-" + ox + "px"
+        piecePic.style.left = "-" + oy + "px"
+        piecePic.src = "data/" + puzzlePath + "/piece-" + x + "x" + y + "." + ext
+
+        pieceDom.appendChild(piecePic);
+        board.appendChild(pieceDom)
+        puzzles[x][y] = pieceDom
+    }
+
+
+    function bootstrap(){
+        const index = localStorage.getItem("INDEX", 17) || 17
+        const DB = DATABASE[index]
+        populate(index)
+        const X = DB[INDEX_PIECES_X]
+        const Y = DB[INDEX_PIECES_Y]
+        const PUZZLE_PATH = DB[INDEX_PIECES_DIR]
+        const EXT = DB[INDEX_EXTENSION]
+        const DX = DB[INDEX_PREVIEW_WIDTH] / X
+        const DY = DB[INDEX_PREVIEW_HEIGHT] / Y
+        const WX = DB[INDEX_PIECE_EXTENDED_WIDTH]
+        const WY = DB[INDEX_PIECE_EXTENDED_HEIGHT]
+        const OX = Math.round((WX - DX) / 2)
+        const OY = Math.round((WY - DY) / 2)
+
+        let OXY = Math.max(OX, OY)
+
+        for(x = 0; x < X; x++) {
+            puzzles[x] = {}
+            for(y = 0; y < Y; y++) {
+                makePiece(PUZZLE_PATH, EXT, x, y, DX, DY, OXY, OXY)
+            }
+        }
+
+        let pdom = document.getElementById('preview')
+        pdom.src = "data/" + DATABASE[index][INDEX_PREVIEW_IMAGE]
+
+        let p = document.getElementById("preview_wrap")
+        if (showPreview == "TRUE") {
+          p.style.visibility = "visible"
+        } else {
+          p.style.visibility = "hidden"
+        }
+
+        let board = document.getElementById('board')
+        GDX = DX
+        GDY = DY
+        GPX = Math.round((board.offsetWidth - DB[INDEX_PREVIEW_WIDTH]) / 2) % GDX
+        GPY = Math.round((board.offsetHeight - DB[INDEX_PREVIEW_HEIGHT]) / 2) % GDY
+
+        dragndrop.init();
+    }
+
+    function onChangeKey(select) {
+      localStorage.setItem("INDEX", select.value)
+      document.location = 'index.html'
+    }
+
+    function populate(selected){
+        const select = document.getElementById('SELECT')
+        for (index in DATABASE) {
+            let option = document.createElement('option')
+            let label = document.createTextNode(DATABASE[index][0])
+            option.value = index
+            option.appendChild(label)
+            select.appendChild(option)
+        }
+        select.value = selected
+    }
+
+    function preview() {
+        let p = document.getElementById("preview_wrap")        
+        if (showPreview == "TRUE") { 
+          p.style.visibility = "hidden"
+          showPreview = "FALSE"
+        } else {
+          p.style.visibility = "visible"
+          showPreview = "TRUE"
+        }
+        localStorage.setItem("PREVIEW", showPreview)
+    }
+    </script>
+
+    <style>
+    body {
+        width: 100%;
+        height: 100%;
+        background-color: #202020;
+    }
+
+    .piece {
+        z-index: 2;
+        opacity: 100%;
+    }
+
+    img {
+        pointer-events: none;
+    }
+
+    #board {
+        position: absolute;
+        left: 5%;
+        top: 5%;
+        width: 90%;
+        height: 90%;
+        background-color: #404040;
+        z-index: 2;
+    }
+
+    #preview_wrap {
+        visibility: hidden;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    #preview {
+        opacity: 10%;
+    }
+</style>
+</head>
+<body onload="bootstrap()">
+  <div id="board" class="js-dragndrop-limiter">
+    <div id="preview_wrap">
+      <img id="preview" />
+    </div>
+  </div>
+  <div id="extra" style="position: fixed; left: 0; bottom: 0; z-index: 2;">
+    <select id="SELECT" style="margin: 10px;" onchange="onChangeKey(this)">
+    </select>
+    <button onclick="preview()" style="margin: 10px;">
+      Toggle Preview (may not be synchronized)
+    </button>
+</div>
+</body>
+</html>
