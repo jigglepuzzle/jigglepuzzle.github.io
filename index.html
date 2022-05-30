@@ -44,14 +44,30 @@
 
         ["cars JIGGLE", "cars.gif", "CARS-4x3-WEBP", 4, 3, "webp", 384, 288, 160, 160],
 
-        ["toaster", "toaster.gif", "toaster-2x4", 2, 4, "gif", 384, 384, 192, 96]
+        ["toaster", "toaster.gif", "toaster-2x4", 2, 4, "gif", 384, 384, 192, 96],
+
+        ["spaceman blue JIGGLE", "spaceman-blue-mini.gif", "SPACEMAN-BLUE-6x8-WEBP", 6, 8, "webp", 450, 600, 135, 135],
+        ["spaceman cyan JIGGLE", "spaceman-cyan-mini.gif", "SPACEMAN-CYAN-6x8-WEBP", 6, 8, "webp", 450, 600, 135, 135],
+        ["spaceman orange JIGGLE", "spaceman-orange-mini.gif", "SPACEMAN-ORANGE-6x8-WEBP", 6, 8, "webp", 450, 600, 135, 135],
+        ["spaceman red JIGGLE", "spaceman-red-mini.gif", "SPACEMAN-RED-6x8-WEBP", 6, 8, "webp", 450, 600, 135, 135],
+        ["spaceman violet JIGGLE", "spaceman-violet-mini.gif", "SPACEMAN-VIOLET-6x8-WEBP", 6, 8, "webp", 450, 600, 135, 135]          
     ]
 
     var puzzles = {}
 
     var showPreview = localStorage.getItem("PREVIEW", "FALSE") || "FALSE";
 
-    function makePiece(puzzlePath, ext, x, y, dx, dy, ox, oy) {
+    function getRandomOffset() {
+        return [Math.round(((Math.random() > 0.5) ? 1000 : 0) + (Math.random() * 600)), Math.round((Math.random() * 700))]
+    }
+
+    function setOffset(dom, id, off) {
+        dom.style.left = off[0] + "px";
+        dom.style.top = off[1] + "px";
+        localStorage.setItem(id, off.join("x"))
+    }
+
+    function makePiece(index, puzzlePath, ext, x, y, dx, dy, ox, oy) {
         let board = document.getElementById('board')
 
         let pieceDom = document.createElement('div')
@@ -59,8 +75,15 @@
         pieceDom.style.height = dy + "px"
         pieceDom.className = "js-dragndrop piece"
         pieceDom.style.position = "absolute";
-        pieceDom.style.left = ((Math.random() > 0.5) ? 1000 : 0) + (Math.random() * 600) + "px";
-        pieceDom.style.top = (Math.random() * 700) + "px";
+
+        let POS = index + "x" + x + "x" + y
+
+        pieceDom.id = POS
+
+        let STR = localStorage.getItem(POS, "") || ""
+        let off = (STR == "") ? getRandomOffset() : STR.split("x")
+
+        setOffset(pieceDom, pieceDom.id, off)
 
         let piecePic = document.createElement('img')
         piecePic.style.position = "relative"
@@ -73,6 +96,15 @@
         puzzles[x][y] = pieceDom
     }
 
+    function scramble() {
+        var arr = document.querySelectorAll("." + dragndrop.dragndropClass);
+        var i = -1;
+        var l = arr.length;
+        while (++i < l) {
+            let off = getRandomOffset()
+            setOffset(arr[i], arr[i].id, off)
+        }
+    }
 
     function bootstrap(){
         const index = localStorage.getItem("INDEX", 17) || 17
@@ -94,7 +126,7 @@
         for(x = 0; x < X; x++) {
             puzzles[x] = {}
             for(y = 0; y < Y; y++) {
-                makePiece(PUZZLE_PATH, EXT, x, y, DX, DY, OXY, OXY)
+                makePiece(index, PUZZLE_PATH, EXT, x, y, DX, DY, OXY, OXY)
             }
         }
 
@@ -118,8 +150,8 @@
     }
 
     function onChangeKey(select) {
-      localStorage.setItem("INDEX", select.value)
-      document.location = 'index.html'
+        localStorage.setItem("INDEX", select.value)
+        document.location = 'index.html'
     }
 
     function populate(selected){
@@ -144,6 +176,10 @@
           showPreview = "TRUE"
         }
         localStorage.setItem("PREVIEW", showPreview)
+    }
+
+    function reload() {
+        document.location = 'index.html'
     }
     </script>
 
@@ -201,6 +237,12 @@
     </select>
     <button onclick="preview()" style="margin: 10px;">
       Toggle Preview (may not be synchronized)
+    </button>
+    <button onclick="scramble()" style="margin: 10px;">
+       Scramble
+    </button>
+    <button onclick="reload()" style="margin: 10px;">
+       Reload Page (may help with synchronization)
     </button>
 </div>
 </body>

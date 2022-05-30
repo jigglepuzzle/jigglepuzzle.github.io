@@ -3,7 +3,7 @@ var GDY = 1
 var GPX = 0
 var GPY = 0
 
-var dragndrop = function( elem, strictDrag, limitByParent ) {
+var dragndrop = function(elem, strictDrag, limitByParent ) {
 	elem.addEventListener("mousedown", onMouseDown);
 	elem.addEventListener("change", onChange);
 	
@@ -24,7 +24,7 @@ var dragndrop = function( elem, strictDrag, limitByParent ) {
 		}
 	}
 	
-	function setPos( x, y ) {
+	function setPos( id, x, y, up ) {
 		if (limited) {
 			var xMax = parent.offsetWidth - elem.offsetWidth;
 			var yMax = parent.offsetHeight - elem.offsetHeight;
@@ -32,7 +32,10 @@ var dragndrop = function( elem, strictDrag, limitByParent ) {
 			x = (x > xMax) ? xMax : ((x < 0) ? 0 : x);
 			y = (y > yMax) ? yMax : ((y < 0) ? 0 : y);
 		}
-		
+		let off = [x, y]
+        if (up) {
+            localStorage.setItem(id, off.join("x"))
+        }
 		elem.style.left = x + "px";
 		elem.style.top = y + "px";
 	}
@@ -63,21 +66,23 @@ var dragndrop = function( elem, strictDrag, limitByParent ) {
 		document.removeEventListener("mousemove", onMouseMove);
 		var x = startX + e.screenX - startMouseX;
 		var y = startY + e.screenY - startMouseY;
-		setPos(Math.round((x - GPX) / GDX) * GDX + GPX, 
-               Math.round((y - GPY) / GDY) * GDY + GPY);
+		setPos(elem.id,
+               Math.round((x - GPX) / GDX) * GDX + GPX, 
+               Math.round((y - GPY) / GDY) * GDY + GPY,
+                true);
         return false;
 	}
 	
 	function onMouseMove( e ) {
 		var x = startX + e.screenX - startMouseX;
 		var y = startY + e.screenY - startMouseY;
-		setPos(x, y);
+		setPos(elem.id, x, y, false);
         return false;
 	}
 	
 	function onChange( e ) {
 		refresh();
-		setPos(elem.offsetLeft, elem.offsetTop);
+		setPos(e.target.id, elem.offsetLeft, elem.offsetTop, false);
 	}
 }
 
