@@ -19,38 +19,49 @@
     const INDEX_PIECE_EXTENDED_HEIGHT = 9
 
     const DATABASE = [
-        ["01_Hatra", "01_Hatra.gif", "01_Hatra-6x5", 6, 5, "gif", 1200, 675, 200, 135],
-        ["02_Leptis-Magna", "02_Leptis-Magna.gif", "02_Leptis-Magna-6x5", 6, 5, "gif", 1200, 675, 200, 135],
-        ["03_Palmyra", "03_Palmyra.gif", "03_Palmyra-6x5", 6, 5, "gif", 1200, 675, 200, 135],
-        ["04_Fort-San-Lorenzo", "04_Fort-San-Lorenzo.gif", "04_Fort-San-Lorenzo-6x5", 6, 5, "gif", 1200, 675, 200, 135],
-        ["05_Nan-Madol", "05_Nan-Madol.gif", "05_Nan-Madol-6x5", 6, 5, "gif", 1200, 675, 200, 135],
-        ["06_Jerusalem", "06_Jerusalem.gif", "06_Jerusalem-6x5", 6, 5, "gif", 1200, 675, 200, 135],
+        ["01_Hatra JIGGLE", "01_Hatra.gif", "01_Hatra-6x5-WEBP", 6, 5, "webp", 1200, 675, 360, 295],
+        ["01_Hatra RECT", "01_Hatra.gif", "01_Hatra-6x5", 6, 5, "gif", 1200, 675, 200, 135],
+        ["02_Leptis-Magna JIGGLE", "02_Leptis-Magna.gif", "02_Leptis-Magna-6x5-WEBP", 6, 5, "webp", 1200, 675, 360, 295],
+        ["02_Leptis-Magna RECT", "02_Leptis-Magna.gif", "02_Leptis-Magna-6x5", 6, 5, "gif", 1200, 675, 200, 135],
+        ["03_Palmyra JIGGLE", "03_Palmyra.gif", "03_Palmyra-6x5-WEBP", 6, 5, "webp", 1200, 675, 360, 295],
+        ["03_Palmyra RECT", "03_Palmyra.gif", "03_Palmyra-6x5", 6, 5, "gif", 1200, 675, 200, 135],
+        ["04_Fort-San-Lorenzo JIGGLE", "04_Fort-San-Lorenzo.gif", "04_Fort-San-Lorenzo-6x5-WEBP", 6, 5, "webp", 1200, 675, 360, 295],
+        ["04_Fort-San-Lorenzo RECT", "04_Fort-San-Lorenzo.gif", "04_Fort-San-Lorenzo-6x5", 6, 5, "gif", 1200, 675, 200, 135],
+        ["05_Nan-Madol JIGGLE", "05_Nan-Madol.gif", "05_Nan-Madol-6x5-WEBP", 6, 5, "webp", 1200, 675, 360, 295],
+        ["05_Nan-Madol RECT", "05_Nan-Madol.gif", "05_Nan-Madol-6x5", 6, 5, "gif", 1200, 675, 200, 135],
+        ["06_Jerusalem JIGGLE 6x5", "06_Jerusalem.gif", "06_Jerusalem-6x5-WEBP", 6, 5, "webp", 1200, 675, 360, 295],
+        ["06_Jerusalem JIGGLE 10x9", "06_Jerusalem.gif", "JERUS-10x9-WEBP", 10, 9, "webp", 1200, 675, 200, 135],
+        ["06_Jerusalem RECT", "06_Jerusalem.gif", "06_Jerusalem-6x5", 6, 5, "gif", 1200, 675, 200, 135],
+        ["08-The-Pyramid-of-the-Sun JIGGLE", "08-The-Pyramid-of-the-Sun.gif", "08-The-Pyramid-of-the-Sun-6x5-WEBP", 6, 5, "webp", 1080, 697, 340, 299],
+        ["08-The-Pyramid-of-the-Sun RECT", "08-The-Pyramid-of-the-Sun.gif", "08-The-Pyramid-of-the-Sun-6x5", 6, 5, "gif", 1080, 697, 180, 140],
+        ["07-Luxor-Temple JIGGLE", "07-Luxor-Temple.gif", "07-Luxor-Temple-6x5-WEBP", 6, 5, "webp", 1080, 753, 340, 310],
+        ["07-Luxor-Temple RECT", "07-Luxor-Temple.gif", "07-Luxor-Temple-6x5", 6, 5, "gif", 1080, 753, 180, 150],
+        ["09-Area-Sacra JIGGLE", "09-Area-Sacra.gif", "09-Area-Sacra-6x5-WEBP", 6, 5, "webp", 1080, 723, 340, 304],
+        ["09-Area-Sacra RECT", "09-Area-Sacra.gif", "09-Area-Sacra-6x5", 6, 5, "gif", 1080, 723, 180, 145],
+        ["10-Parthenon JIGGLE", "10-Parthenon.gif", "10-Parthenon-6x5-WEBP", 6, 5, "webp", 1080, 717, 340, 303],
+        ["10-Parthenon RECT", "10-Parthenon.gif", "10-Parthenon-6x5", 6, 5, "gif", 1080, 717, 180, 143],
+        ["11-Nohoch-Mul-Pyramid JIGGLE", "11-Nohoch-Mul-Pyramid.gif", "11-Nohoch-Mul-Pyramid-6x5-WEBP", 6, 5, "webp", 1080, 710, 340, 302],
+        ["11-Nohoch-Mul-Pyramid RECT", "11-Nohoch-Mul-Pyramid.gif", "11-Nohoch-Mul-Pyramid-6x5", 6, 5, "gif", 1080, 710, 180, 142],
+        ["12-Temple-of-Jupiter JIGGLE", "12-Temple-of-Jupiter.gif", "12-Temple-of-Jupiter-6x5-WEBP", 6, 5, "webp", 1080, 720, 340, 304],
+        ["12-Temple-of-Jupiter RECT", "12-Temple-of-Jupiter.gif", "12-Temple-of-Jupiter-6x5", 6, 5, "gif", 1080, 720, 180, 144],
+        ["13-Milecastle JIGGLE", "13-Milecastle.gif", "13-Milecastle-6x5-WEBP", 6, 5, "webp", 1080, 750, 340, 310],
+        ["13-Milecastle RECT", "13-Milecastle.gif", "13-Milecastle-6x5", 6, 5, "gif", 1080, 750, 180, 150],
 
-        ["06_Jerusalem JIGGLE", "06_Jerusalem.gif", "JERUS-10x9-WEBP", 10, 9, "webp", 1200, 675, 200, 135],
+        ["airport JIGGLE", "airport.gif", "AIRPORT-4x6-WEBP", 4, 6, "webp", 500, 750, 225, 225],
+        ["airport RECT", "airport.gif", "airport-4x5", 4, 5, "gif", 500, 750, 125, 150],
 
-        ["07-Luxor-Temple", "07-Luxor-Temple.gif", "07-Luxor-Temple-6x5", 6, 5, "gif", 1080, 753, 180, 150],
-        ["08-The-Pyramid-of-the-Sun", "08-The-Pyramid-of-the-Sun.gif", "08-The-Pyramid-of-the-Sun-6x5", 6, 5, "gif", 1080, 697, 180, 140],
-        ["09-Area-Sacra", "09-Area-Sacra.gif", "09-Area-Sacra-6x5", 6, 5, "gif", 1080, 723, 180, 145],
-        ["10-Parthenon", "10-Parthenon.gif", "10-Parthenon-6x5", 6, 5, "gif", 1080, 717, 180, 143],
-        ["11-Nohoch-Mul-Pyramid", "11-Nohoch-Mul-Pyramid.gif", "11-Nohoch-Mul-Pyramid-6x5", 6, 5, "gif", 1080, 710, 180, 142],
-        ["12-Temple-of-Jupiter", "12-Temple-of-Jupiter.gif", "12-Temple-of-Jupiter-6x5", 6, 5, "gif", 1080, 720, 180, 144],
-        ["13-Milecastle", "13-Milecastle.gif", "13-Milecastle-6x5", 6, 5, "gif", 1080, 750, 180, 150],
-
-        ["airport", "airport.gif", "airport-4x5", 4, 5, "gif", 500, 750, 125, 150],
-        ["airport JIGGLE", "airport.gif", "AIRPORT-4x5-WEBP", 4, 5, "webp", 500, 750, 200, 225],
-
-
-        ["cars", "cars.gif", "cars-4x3", 4, 3, "gif", 384, 288, 96, 96],
 
         ["cars JIGGLE", "cars.gif", "CARS-4x3-WEBP", 4, 3, "webp", 384, 288, 160, 160],
+        ["cars RECT", "cars.gif", "cars-4x3", 4, 3, "gif", 384, 288, 96, 96],
 
-        ["toaster", "toaster.gif", "toaster-2x4", 2, 4, "gif", 384, 384, 192, 96],
+        ["toaster JIGGLE", "toaster.gif", "TOASTER-4x4-WEBP", 4, 4, "webp", 384, 384, 170, 170],
+        ["toaster RECT", "toaster.gif", "toaster-2x4", 2, 4, "gif", 384, 384, 192, 96],
 
         ["spaceman blue JIGGLE", "spaceman-blue-mini.gif", "SPACEMAN-BLUE-6x8-WEBP", 6, 8, "webp", 450, 600, 135, 135],
         ["spaceman cyan JIGGLE", "spaceman-cyan-mini.gif", "SPACEMAN-CYAN-6x8-WEBP", 6, 8, "webp", 450, 600, 135, 135],
         ["spaceman orange JIGGLE", "spaceman-orange-mini.gif", "SPACEMAN-ORANGE-6x8-WEBP", 6, 8, "webp", 450, 600, 135, 135],
         ["spaceman red JIGGLE", "spaceman-red-mini.gif", "SPACEMAN-RED-6x8-WEBP", 6, 8, "webp", 450, 600, 135, 135],
-        ["spaceman violet JIGGLE", "spaceman-violet-mini.gif", "SPACEMAN-VIOLET-6x8-WEBP", 6, 8, "webp", 450, 600, 135, 135]          
+        ["spaceman violet JIGGLE", "spaceman-violet-mini.gif", "SPACEMAN-VIOLET-6x8-WEBP", 6, 8, "webp", 450, 600, 135, 135]
     ]
 
     var puzzles = {}
@@ -58,7 +69,7 @@
     var showPreview = localStorage.getItem("PREVIEW", "FALSE") || "FALSE";
 
     function getRandomOffset() {
-        return [Math.round(((Math.random() > 0.5) ? 1000 : 0) + (Math.random() * 600)), Math.round((Math.random() * 700))]
+        return [Math.round(((Math.random() > 0.5) ? 900 : 0) + (Math.random() * 500)), Math.round((Math.random() * 600))]
     }
 
     function setOffset(dom, id, off) {
@@ -107,7 +118,7 @@
     }
 
     function bootstrap(){
-        const index = localStorage.getItem("INDEX", 17) || 17
+        const index = localStorage.getItem("INDEX", 29) || 29
         const DB = DATABASE[index]
         populate(index)
         const X = DB[INDEX_PIECES_X]
@@ -143,8 +154,10 @@
         let board = document.getElementById('board')
         GDX = DX
         GDY = DY
-        GPX = Math.round((board.offsetWidth - DB[INDEX_PREVIEW_WIDTH]) / 2) % GDX
-        GPY = Math.round((board.offsetHeight - DB[INDEX_PREVIEW_HEIGHT]) / 2) % GDY
+        GOX = Math.round((board.offsetWidth - DB[INDEX_PREVIEW_WIDTH]) / 2)
+        GOY = Math.round((board.offsetHeight - DB[INDEX_PREVIEW_HEIGHT]) / 2)
+        GPX = GOX % GDX
+        GPY = GOY % GDY
 
         dragndrop.init();
     }
@@ -167,8 +180,8 @@
     }
 
     function preview() {
-        let p = document.getElementById("preview_wrap")        
-        if (showPreview == "TRUE") { 
+        let p = document.getElementById("preview_wrap")
+        if (showPreview == "TRUE") {
           p.style.visibility = "hidden"
           showPreview = "FALSE"
         } else {
@@ -188,6 +201,7 @@
         width: 100%;
         height: 100%;
         background-color: #202020;
+        overflow: hidden;
     }
 
     .piece {
@@ -207,6 +221,7 @@
         height: 90%;
         background-color: #404040;
         z-index: 2;
+        overflow: hidden;
     }
 
     #preview_wrap {

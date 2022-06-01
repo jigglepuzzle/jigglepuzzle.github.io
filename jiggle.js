@@ -2,6 +2,8 @@ var GDX = 1
 var GDY = 1
 var GPX = 0
 var GPY = 0
+var GOX = 0
+var GOY = 0
 
 var dragndrop = function(elem, strictDrag, limitByParent ) {
 	elem.addEventListener("mousedown", onMouseDown);
@@ -35,6 +37,14 @@ var dragndrop = function(elem, strictDrag, limitByParent ) {
 		let off = [x, y]
         if (up) {
             localStorage.setItem(id, off.join("x"))
+            let xx = Math.floor((x - GOX) / GDX)
+            let yy = Math.floor((y - GOY) / GDY)
+            let ref = id.split("x")
+            if ((ref[1] == xx) && (ref[2] == yy)) {
+              document.getElementById(id).style.zIndex = -1
+            } else {
+              document.getElementById(id).style.zIndex = 9
+            }
         }
 		elem.style.left = x + "px";
 		elem.style.top = y + "px";
